@@ -171,6 +171,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &783719390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 783719391}
+  m_Layer: 0
+  m_Name: launchpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &783719391
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783719390}
+  m_LocalRotation: {x: 0, y: .382683456, z: 0, w: .923879504}
+  m_LocalPosition: {x: 0, y: .179999709, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1341531863}
+  m_RootOrder: 3
 --- !u!1 &830128553
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +327,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1341531863}
   - 135: {fileID: 1341531864}
+  - 114: {fileID: 1341531865}
   m_Layer: 0
   m_Name: Slingshot
   m_TagString: Untagged
@@ -313,13 +341,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341531862}
-  m_LocalRotation: {x: 0, y: .382683456, z: 0, w: .923879504}
-  m_LocalPosition: {x: -20.4200001, y: -7.94000006, z: -.100000001}
+  m_LocalRotation: {x: 0, y: -.382683456, z: 0, w: .923879504}
+  m_LocalPosition: {x: -25.25, y: -7.94000006, z: -.100000001}
   m_LocalScale: {x: .590000033, y: .784242094, z: .590000033}
   m_Children:
   - {fileID: 1513917016}
   - {fileID: 1434125634}
   - {fileID: 1266679452}
+  - {fileID: 783719391}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!135 &1341531864
@@ -334,6 +363,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.59980106
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1341531865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1341531862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445fd22dd00364742b5ab00edd42bf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1434125633
 GameObject:
   m_ObjectHideFlags: 0
