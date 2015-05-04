@@ -179,6 +179,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 783719391}
+  - 122: {fileID: 783719392}
   m_Layer: 0
   m_Name: launchpoint
   m_TagString: Untagged
@@ -198,6 +199,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1341531863}
   m_RootOrder: 3
+--- !u!122 &783719392
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783719390}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967040
+  m_Size: 1
 --- !u!1 &830128553
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +354,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341531862}
   m_LocalRotation: {x: 0, y: -.382683456, z: 0, w: .923879504}
-  m_LocalPosition: {x: -25.25, y: -7.94000006, z: -.100000001}
+  m_LocalPosition: {x: -14.46, y: -7.94000006, z: -.100000001}
   m_LocalScale: {x: .590000033, y: .784242094, z: .590000033}
   m_Children:
   - {fileID: 1513917016}
@@ -374,6 +386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445fd22dd00364742b5ab00edd42bf85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabProjectile: {fileID: 165556, guid: a4102b839c0fa984d9bcf72adff51c73, type: 2}
+  velocityFactor: 200
 --- !u!1 &1434125633
 GameObject:
   m_ObjectHideFlags: 0
