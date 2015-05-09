@@ -35,6 +35,7 @@ void OnMouseDown()
     //set the game to aiming mode
 
     aimingMode = true;
+   
 
     // instantiate projectile at launch point
     
@@ -52,6 +53,11 @@ void Update()
     //check for aimingMode
     
     if (!aimingMode) return;
+
+    if (aimingMode)
+    {
+        halo.SetActive(true);
+    }
     
     // get mouse position and convert it to 2D
     
