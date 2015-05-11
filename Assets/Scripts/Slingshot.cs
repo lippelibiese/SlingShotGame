@@ -51,7 +51,7 @@ void OnMouseDown()
 void Update()
 {
     //check for aimingMode
-    
+
     if (!aimingMode) return;
 
     if (aimingMode)
@@ -73,8 +73,9 @@ void Update()
     // constrain max distance to radius of sphere collider
     float maxMagnitude = this.GetComponent<SphereCollider>().radius; 
 
+    //print(mousePos3D);
+    //print(launchPos);
     
-
     mouseDelta = Vector3.ClampMagnitude(mouseDelta, maxMagnitude);
 
     // set projectile to new position and shoot it
@@ -87,6 +88,9 @@ void Update()
         projectile.GetComponent<Rigidbody>().isKinematic = false;
 
         projectile.GetComponent<Rigidbody>().velocity = -mouseDelta * velocityFactor;
+
+        FollowCam.S.poi = projectile;
     }
+
 }
 }
