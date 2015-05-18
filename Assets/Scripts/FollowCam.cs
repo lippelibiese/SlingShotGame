@@ -10,6 +10,8 @@ public class FollowCam : MonoBehaviour
 
     private float FcamZ;
 
+    public Vector2 minXY;
+
     void Awake()
     {
 
@@ -30,9 +32,14 @@ public class FollowCam : MonoBehaviour
 
         if(tt<1) tt += 0.02f;
 
+        destination.x = Mathf.Max(minXY.x, destination.x);
+        destination.y = Mathf.Max(minXY.y, destination.y);
+
       Vector3 newDestination = Vector3.Lerp (transform.position, destination, tt);
 
         transform.position = newDestination;
+
+        this.GetComponent<Camera> ().orthographicSize = 10 + destination.y;
 
 
     }
