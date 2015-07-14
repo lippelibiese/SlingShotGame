@@ -7,30 +7,50 @@ public class FollowCam : MonoBehaviour
     public static FollowCam S;  // Singleton follow Cam instance
 
     public GameObject poi;
+    public float velThresh;
 
     private float FcamZ;
 
     public Vector2 minXY;
 
+	Vector3 startpos;
+
     void Awake()
     {
-
+        velThresh = 0.2f;
         S = this;
         FcamZ = transform.position.z;
+		startpos = transform.position;
     }
 
     void FixedUpdate()
     {
-
+		Vector3 destination;
         // check if poi exists
-        if (poi == null) return;
+        if (poi == null) {
 
-        Vector3 destination = poi.transform.position;
-        destination.z = FcamZ;
+			//set the poi to the slingshot
+			destination = startpos;
+		} 
 
-        float tt = 0.02f;
+		else {
+			destination = poi.transform.position;
+		}
 
-        if(tt<1) tt += 0.02f;
+        
+
+		// is poi a projectile?
+			if(poi !=null && poi.tag == "bullet")
+			// check if it is resting
+			if(poi.GetComponent<Rigidbody>().velocity.magnitude < velThresh)
+				//set poi to null
+				poi = null;
+
+		destination.z = FcamZ;
+		
+		float tt = 0.02f;
+		
+		if(tt<1) tt += 0.02f;
 
         destination.x = Mathf.Max(minXY.x, destination.x);
         destination.y = Mathf.Max(minXY.y, destination.y);

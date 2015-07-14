@@ -65,4 +65,49 @@ public class CloudCrafter : MonoBehaviour {
 
         }
     }
+	void Update(){
+		// iterate through all cloud instance
+			foreach (GameObject cloudinst in cloudInstances){
+				// get the position and scale
+			float scaleVal= cloudinst.transform.localScale.x;
+			Vector3 cPos = cloudinst.transform.position;
+
+			cPos.x -= Time.deltaTime *cloudSpeedMult * scaleVal;
+				
+				//check if a clouds x pos is too small
+				if(cPos.x < cloudPosMin.x){
+				 //set it to maximum x
+
+				cPos.x = cloudPosMax.x;
+			}
+			cloudinst.transform.position = cPos;
+		}
+
+
 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
