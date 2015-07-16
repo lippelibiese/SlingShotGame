@@ -12,11 +12,7 @@ public class ImpactDestruction : MonoBehaviour {
     
    
 
-	// Use this for initialization
-	void Start () {
-        objectHealth = 10;
-        damage = 10;
-	}
+	
 
     void OnCollisionEnter(Collision col)
     {
