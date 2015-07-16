@@ -3,14 +3,20 @@ using System.Collections;
 
 public class Slingshot : MonoBehaviour {
 
-    public GameObject prefabProjectile;
+   
+    public GameObject prefabNormal;
+    public GameObject prefabSplit;
+    public GameObject prefabKamikaze;
     public float velocityFactor;
+    public Material trailMat;
 
-	private  GameObject halo;
+   	private  GameObject halo;
     private bool aimingMode;
+    private GameObject prefabProjectile;
 
     private GameObject projectile;
     private Vector3 launchPos;
+    private string shotType;
 
 
 void Awake(){
@@ -18,6 +24,8 @@ void Awake(){
 		halo = haloTrans.gameObject;
 		halo.SetActive(false);
         launchPos = haloTrans.position;
+        shotType = "Normal";
+        prefabProjectile = prefabNormal;
 }
 
 void OnMouseEnter(){
@@ -45,11 +53,19 @@ void OnMouseDown()
 
     projectile.GetComponent<Rigidbody>().isKinematic = true;
     projectile.transform.position = launchPos;
+    GameController.ShotFired();
+
+    
 
 }
 
 void Update()
 {
+    
+    
+
+    
+
     //check for aimingMode
 
     if (!aimingMode) return;
@@ -78,19 +94,51 @@ void Update()
     
     mouseDelta = Vector3.ClampMagnitude(mouseDelta, maxMagnitude);
 
+   
+
     // set projectile to new position and shoot it
     projectile.transform.position = launchPos + mouseDelta;
 
-
+    
     if (Input.GetMouseButtonUp(0))
     {
         aimingMode = false;
         projectile.GetComponent<Rigidbody>().isKinematic = false;
+       
+        
 
         projectile.GetComponent<Rigidbody>().velocity = -mouseDelta * velocityFactor;
 
         FollowCam.S.poi = projectile;
+
+        //add trail renderer and adjust its settings
+
+        TrailRenderer tr = projectile.AddComponent<TrailRenderer>();
+        tr.material = trailMat;
+        tr.startWidth = 0.1f;
+        tr.endWidth = 0.1f;
+        tr.time = 50;
+    }
+}
+
+    // function to switch between shot types
+
+    public void shotSelect(string type){
+
+          shotType = type;
+        switch (shotType)
+        {
+            case "Normal":
+                prefabProjectile = prefabNormal;
+                break;
+            case "Split":
+                prefabProjectile = prefabSplit;
+                break;
+            case "Kamikaze":
+                prefabProjectile = prefabKamikaze;
+                break;
+        }
+
     }
 
-}
 }

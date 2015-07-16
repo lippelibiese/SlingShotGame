@@ -5,8 +5,8 @@ public class ImpactDestruction : MonoBehaviour {
 
 
     private float impactForce;
-    private float objectHealth;
-    
+
+    public float objectHealth;
     public float destroyForce;
     public float damage;
     
@@ -14,14 +14,14 @@ public class ImpactDestruction : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        objectHealth = 30;
+        objectHealth = 10;
         damage = 10;
 	}
 
     void OnCollisionEnter(Collision col)
     {
         impactForce = col.relativeVelocity.magnitude;
-        print("impactForce " + impactForce);
+        
         if (impactForce > destroyForce)
         {
             objectHealth -= damage;

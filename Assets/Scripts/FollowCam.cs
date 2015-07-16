@@ -4,63 +4,67 @@ using System.Collections;
 public class FollowCam : MonoBehaviour
 {
 
-    public static FollowCam S;  // Singleton follow Cam instance
+    public static FollowCam S; // Singleton Instance
 
-    public GameObject poi;
+    // Fields shown in Unity Inspector pane
+    public float easing = 0.05f;
+    public Vector2 minXY;
     public float velThresh;
 
-    private float FcamZ;
+    // Fields set dynamically	
+    public GameObject poi; // The Point Of Interest
+    private float camZ; // Desired Camera Z Position
 
-    public Vector2 minXY;
-
-	Vector3 startpos;
 
     void Awake()
     {
-        velThresh = 0.2f;
         S = this;
-        FcamZ = transform.position.z;
-		startpos = transform.position;
+        camZ = this.transform.position.z;
+        velThresh = 0.5f;
     }
 
     void FixedUpdate()
     {
-		Vector3 destination;
-        // check if poi exists
-        if (poi == null) {
 
-			//set the poi to the slingshot
-			destination = startpos;
-		} 
+        Vector3 destination;
 
-		else {
-			destination = poi.transform.position;
-		}
+        // If the point of interest is empty, set it to (0,0,0)
+        if (poi == null)
+        {
+            destination = Vector3.zero;
+        }
+        else
+        {
+            // Otherwise, get the poi's position
+            destination = poi.transform.position;
 
-        
+            // If the poi is the projectile check if it is resting
+            if (poi.tag == "bullet")
+            {
+                // If its not moving
+                if (poi.GetComponent<Rigidbody>().velocity.magnitude <= velThresh)
+                {
+                    // Return to default view in next Update()
+                    poi = null;
+                    return;
+                }
+            }
+        }
 
-		// is poi a projectile?
-			if(poi !=null && poi.tag == "bullet")
-			// check if it is resting
-			if(poi.GetComponent<Rigidbody>().velocity.magnitude < velThresh)
-				//set poi to null
-				poi = null;
-
-		destination.z = FcamZ;
-		
-		float tt = 0.02f;
-		
-		if(tt<1) tt += 0.02f;
-
+        // Limit the X and Y to minimum values
         destination.x = Mathf.Max(minXY.x, destination.x);
         destination.y = Mathf.Max(minXY.y, destination.y);
 
-      Vector3 newDestination = Vector3.Lerp (transform.position, destination, tt);
+        // Interpolate between current camera position and poi
+        destination = Vector3.Lerp(transform.position, destination, easing);
 
-        transform.position = newDestination;
+        // Save the camZ in this destination
+        destination.z = camZ;
 
-        this.GetComponent<Camera> ().orthographicSize = 10 + destination.y;
+        // Set camera to this destination
+        transform.position = destination;
 
-
+        // Set OrthographicSize of camera to keep the ground in view
+        this.GetComponent<Camera>().orthographicSize = destination.y + 10;
     }
 }
